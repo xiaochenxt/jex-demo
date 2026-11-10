@@ -29,7 +29,6 @@ src/main/
 ├── resources/
 │   ├── META-INF/native-image/
 │   │   ├── native-image.properties (原生镜像配置)
-│   │   └── resource-config.json (资源包含配置)
 │   ├── static/ (静态资源目录)
 │   │   └── index.html
 │   └── application.properties (应用配置)
@@ -54,7 +53,5 @@ src/main/
 
 ## 配置信息
 - 应用端口：33111 (在 application.properties 中配置)
-- 原生镜像最大堆大小：10MB
-- 静态资源包含模式：`\Qstatic/*.*\E`
 
 这个项目是一个典型的轻量级、高性能的原生 Web 服务，适合用于构建 REST API 和提供静态内容服务，并且已经配置好支持 GraalVM 原生镜像编译。
