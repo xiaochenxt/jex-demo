@@ -1,4 +1,4 @@
-# Native Demo 项目说明
+# Jex Demo 项目说明
 
 这是一个基于 Avaje 技术栈的轻量级原生 Web 服务项目。
 
