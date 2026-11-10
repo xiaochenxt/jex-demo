@@ -9,19 +9,22 @@ import io.avaje.jex.http.HttpResponseException;
 import io.avaje.jex.http.HttpStatus;
 import io.avaje.jex.staticcontent.StaticContent;
 
+import java.io.File;
 import java.util.Map;
 
 import static io.avaje.jex.file.upload.MultipartConfig.FileSize.MB;
 
 public class WebApplication {
 
-    void main() {
+    public static void main(String[] args) {
         try (BeanScope beanScope = BeanScope.builder().build()) {
             var services = beanScope.list(Routing.HttpService.class);
-            Jex.create()
-                    .plugin(StaticContent.ofClassPath("/static/").route("/").directoryIndex("index.html").preCompress().build())
-                    .plugin(StaticContent.ofFile("./static/").route("/").directoryIndex("index.html").preCompress().build())
-                    .plugin(FileUploadPlugin.create(multipartConfig -> multipartConfig.maxFileSize(50, MB)))
+            var jex = Jex.create()
+                    .plugin(StaticContent.ofClassPath("/static/").route("/").directoryIndex("index.html").preCompress().build());
+            if (new File("./static").exists()) {
+                jex.plugin(StaticContent.ofFile("./static/").route("/").directoryIndex("index.html").preCompress().build());
+            }
+            jex.plugin(FileUploadPlugin.create(multipartConfig -> multipartConfig.maxFileSize(50, MB)))
                     .port(Config.getInt("server.port"))
                     .routing(services)
                     .error(HttpResponseException.class, (ctx, exception) -> {
