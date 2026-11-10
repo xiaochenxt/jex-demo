@@ -17,6 +17,9 @@
 ### JDK 版本
 - 使用 JDK 25
 
+### GraalVM 版本
+- 使用 GraalVM 25.5.5.0.3+1.1
+
 ## 项目结构
 ```
 src/main/
